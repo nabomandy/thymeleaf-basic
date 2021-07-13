@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>예시</h1>
+<span th:text="${data}">html data</span>
+
+<h1>1. 표준 HTML 주석</h1>
+<!--
+<span th:text="${data}">html data</span> 타임리프는 이 부분을 렌더링 하지 않는다. 그냥 그대로 남겨놓고 렌더링을 안한다. 페이지소스보기에서 코드가 그대로 보인다.
+-->
+
+<h1>2. 타임리프 파서 주석</h1>
+<!--/* [[${data}]] */-->
+<!--얘는 타임리프 파서 자체가 주석으로 인정한다. 렌더링 할때 이 부분을 싹 지워버린다.이건 한줄로 표현한거, 아래는 여러줄로 표현한것. 페이지소스보기에서도 안보인다.-->
+
+<!--/*-->
+<span th:text="${data}">html data</span>
+<!--*/-->
+
+<h1>3. 타임리프 프로토타입 주석</h1> <!--html 파일 그대로 열 때는 안보여줄거야. 서버사이드에서 렌더링 해서 볼 때는 볼거야-->
+<!--/*/
+<span th:text="${data}">html data</span>
+/*/-->
+
+</body>
+</html>

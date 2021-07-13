@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 자바스크립트 인라인 사용 전 -->
+<script>
+    var username = [[${user.username}]]; /*var username = "[[${user.username}]]"; 이렇게 해야 에러가 안남. 자바스크립트에 타임리프값을 전달하는게 쉽지 않다는 걸 보여준다. 아랜 숫자여서 ""이 필요 없는 것이다.*/
+    var age = [[${user.age}]];
+    //자바스크립트 내추럴 템플릿
+    var username2 = /*[[${user.username}]]*/ "test username";
+    //객체 -> 객체를 아래처럼 호출하면 객체user.toString이 호출이 되는 것
+    var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 사용 후 -->
+<script th:inline="javascript">
+    var username = [[${user.username}]];
+    var age = [[${user.age}]];
+    //자바스크립트 내추럴 템플릿
+    var username2 = /*[[${user.username}]]*/ "test username"; /*html 파일을 실행하면 "test username", 렌더링하면 [[${user.username}]]이 나오게 한다.*/
+    //객체 -> 인라인 사용하면 객체를 json으로 넣어준다.객체를 json으로 바꿔서 넣어주는 것. 자바스크립트에서 제이슨은 넣을 수 있죠.
+    var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 each-->
+<script th:inline="javascript">
+
+    [# th:each="user, stat : ${usere}"]
+    var user[[${stat.count}]] = [[${user}]]; /*[[${user}]]부분은 객체이기 때문에 json으로 반환된다.*/
+    [/]
+
+</script>
+</body>
+</html>
